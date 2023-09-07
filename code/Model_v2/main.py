@@ -41,29 +41,29 @@ initial_space = [
 # Sensitivity analysis with different parameters
 
 params = OrderedDict(
-    initial_condition = [initial_space],
-    n_epi = [4],
-    beta = [0.1],
-    r_base = [0.2],
-    r1 = [0.5],
-    r2 = [1],
-    r3 = [0.5],
-    alpha = [0.02],
-    gamma = [0.1],
-    theta_x = [-0.5],
-    theta_k = [1],
-    theta_h = [1],
-    B = [1],
-    pc = [1],
-    mu = [0],
-    sigma = [0.15],
-    threshold = [1e-5],
-    v = [0.57721],
-    k = [0.9],
-    c_l = [13],
-    c_h = [29],
-    w_l = [51],
-    w_h = [115]
+    initial_condition = [initial_space], #  Initial conditions
+    n_epi = [4], # Number of epi updates between two decision updates
+    beta = [0.1], # Infection rate
+    r_base = [0.25], # basis contact rate
+    r1 = [0.25], # Additional contact on diagonal entries
+    r2 = [1], #  Additional contacts between two work risk groups
+    r3 = [0.5], # Additional contacts between low-SES risk groups
+    alpha = [0.02], # rate from recovered to susceptible
+    gamma = [0.1], # recovery rate
+    theta_x = [-0.5], # penalty for being sick
+    theta_k = [1], # Extra sensitivity of vulnerable population
+    theta_h = [1], # Sensitivity to hassle costs
+    B = [1], # Payoff for making risky decision
+    pc = [1], # Additional costs of risky behavior if infected
+    mu = [0], # mean of log hassle cost
+    sigma = [0.15], # std of log hassle cost
+    threshold = [1e-5], # tolerance of solving Bellman function
+    v = [0.57721], # Euler’s constant
+    k = [0.9], # Discount factor
+    c_l = [13], # Baseline level of consumption for low-SES
+    c_h = [29], # Baseline level of consumption for high-SES
+    w_l = [51], #  Wage for low-SES individuals
+    w_h = [115] #  Wage for high-SES individuals
 )
 
 for run in RunBuilder.get_runs(params):
