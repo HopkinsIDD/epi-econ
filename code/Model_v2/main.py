@@ -2,8 +2,12 @@ from collections import OrderedDict
 from collections import namedtuple
 from itertools import product
 from Model import Model
+import pandas as pd
+import numpy as np
+
 # Manage parameters for simulation
 
+file = 'Model_updated/pc' # path to save simulation results
 
 class RunBuilder:
     @staticmethod
@@ -66,29 +70,67 @@ params = OrderedDict(
     w_h = [115] #  Wage for high-SES individuals
 )
 
+index = 1
+num_simulations = 10
+dic_ref = []
 for run in RunBuilder.get_runs(params):
-    test_1 = Model(initial_condition=run.initial_condition,
-                   n_epi = run.n_epi,
-                   beta = run.beta,
-                   r_base = run.r_base,
-                   r1 = run.r1,
-                   r2 = run.r2,
-                   r3 = run.r3,
-                   alpha = run.alpha,
-                   gamma = run.gamma,
-                   theta_x = run.theta_x,
-                   theta_k = run.theta_k,
-                   theta_h = run.theta_h,
-                   B = run.B,
-                   pc = run.pc,
-                   mu = run.mu,
-                   sigma = run.sigma,
-                   threshold = run.threshold,
-                   v = run.v,
-                   k = run.k,
-                   c_l = run.c_l,
-                   c_h = run.c_h,
-                   w_l = run.w_l,
-                   w_h = run.w_h)
+    for i in np.arange(num_simulations):
+        test = Model(initial_condition=run.initial_condition,
+                     n_epi = run.n_epi,
+                     beta = run.beta,
+                     r_base = run.r_base,
+                     r1 = run.r1,
+                     r2 = run.r2,
+                     r3 = run.r3,
+                     alpha = run.alpha,
+                     gamma = run.gamma,
+                     theta_x = run.theta_x,
+                     theta_k = run.theta_k,
+                     theta_h = run.theta_h,
+                     B = run.B,
+                     pc = run.pc,
+                     mu = run.mu,
+                     sigma = run.sigma,
+                     threshold = run.threshold,
+                     v = run.v,
+                     k = run.k,
+                     c_l = run.c_l,
+                     c_h = run.c_h,
+                     w_l = run.w_l,
+                     w_h = run.w_h)
+        df = test.run(300)
 
-df_1 = test_1.run(5)
+        dic = {
+            'Model': str(index),
+            'initial_condition': run.initial_condition,
+            'n_epi': run.n_epi,
+            'beta': run.beta,
+            'r_base': run.r_base,
+            'r1': run.r1,
+            'r2': run.r2,
+            'r3' : run.r3,
+            'alpha': run.alpha,
+            'gamma': run.gamma,
+            'theta_x': run.theta_x,
+            'theta_k': run.theta_k,
+            'theta_h': run.theta_h,
+            'B': run.B,
+            'pc': run.pc,
+            'mu': run.mu,
+            'sigma': run.sigma,
+            'threshold': run.threshold,
+            'v': run.v,
+            'k': run.k,
+            'c_l': run.c_l,
+            'c_h': run.c_h,
+            'w_l': run.w_l,
+            'w_h': run.w_h,
+            'Model_run': i + 1
+        }
+        dic_ref.append(dic)
+
+        df.to_pickle(file + '/model_' + str(index) + '_run_' + str(i + 1) + '.pkl')
+    index += 1
+
+df_ref = pd.DataFrame(dic_ref)
+df_ref.to_pickle(file + '/model_ref.pkl')
