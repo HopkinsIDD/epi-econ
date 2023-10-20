@@ -449,3 +449,73 @@ class Model:
         df = pd.DataFrame(dic_list)
 
         return df
+
+    def run_basic_SIR(self, iteration):
+
+        self.iteration = iteration
+        dic_list = []
+        for agent in self.total_agent:
+            dic = {
+                    'm': agent.index,
+                    't': agent.time,
+                    'decision': agent.decision,
+                    'state_VUL': agent.state_VUL,
+                    'state_SES': agent.state_SES,
+                    'infection_status': agent.infection_status,
+                    'risk_group': agent.risk_group,
+                    'hassle_cost_group': agent.hassle_cost_group
+                }
+            dic_list.append(dic)
+
+        for i in trange(self.iteration):
+            for j in range(self.n_epi):
+                p_g0_00 = self.transition_matrix('g0-00', self.n_epi)
+                p_g0_01 = self.transition_matrix('g0-01', self.n_epi)
+                p_g0_10 = self.transition_matrix('g0-10', self.n_epi)
+                p_g0_11 = self.transition_matrix('g0-11', self.n_epi)
+                p_g1_00 = self.transition_matrix('g1-00', self.n_epi)
+                p_g1_01 = self.transition_matrix('g1-01', self.n_epi)
+                p_g1_10 = self.transition_matrix('g1-10', self.n_epi)
+                p_g1_11 = self.transition_matrix('g1-11', self.n_epi)
+
+                for agent in self.total_agent:
+                    if agent.risk_group == 'g0-00':
+                        agent.update_infection_status(p_g0_00)
+
+                    elif agent.risk_group == 'g0-01':
+                        agent.update_infection_status(p_g0_01)
+
+                    elif agent.risk_group == 'g0-10':
+                        agent.update_infection_status(p_g0_10)
+
+                    elif agent.risk_group == 'g0-11':
+                        agent.update_infection_status(p_g0_11)
+
+                    elif agent.risk_group == 'g1_00':
+                        agent.update_infection_status(p_g1_00)
+
+                    elif agent.risk_group == 'g1-01':
+                        agent.update_infection_status(p_g1_01)
+
+                    elif agent.risk_group == 'g1-10':
+                        agent.update_infection_status(p_g1_10)
+
+                    elif agent.risk_group == 'g1-11':
+                        agent.update_infection_status(p_g1_11)
+
+                    if j == self.n_epi - 1:
+                        agent.update_time()
+                        dic = {
+                            'm': agent.index,
+                            't': agent.time,
+                            'decision': agent.decision,
+                            'state_VUL': agent.state_VUL,
+                            'state_SES': agent.state_SES,
+                            'infection_status': agent.infection_status,
+                            'risk_group': agent.risk_group,
+                            'hassle_cost_group': agent.hassle_cost_group
+                            }
+                        dic_list.append(dic)
+        df = pd.DataFrame(dic_list)
+
+        return df
