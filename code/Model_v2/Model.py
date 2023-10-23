@@ -202,14 +202,24 @@ class Model:
                                                   'g1-11'],
                                            columns=['g0-00', 'g0-01', 'g0-10', 'g0-11', 'g1-00', 'g1-01', 'g1-10',
                                                     'g1-11'])
+        self.contact_matrix = self.contact_matrix + self.r_base
 
         for row in self.contact_matrix.index:
             for col in self.contact_matrix.columns:
-                self.contact_matrix.loc[row, col] = self.r_base + float(row[1]) * float(col[1]) * self.r2 \
-                                                    + float(row[1]) * float(col[1]) * (
-                                                                float(row[4]) * float(col[4])) * self.r3
                 if row == col:
-                    self.contact_matrix.loc[row, col] = self.contact_matrix.loc[row, col] + r1
+                    self.contact_matrix.loc[row, col] = self.contact_matrix.loc[row, col] * self.r1
+                if (row[1] == '1') & (col[1] == '1'):
+                    self.contact_matrix.loc[row, col] = self.contact_matrix.loc[row, col] * self.r2
+                if row[4] == '1':
+                    self.contact_matrix.loc[row, col] = self.contact_matrix.loc[row, col] * self.r3
+
+        # for row in self.contact_matrix.index:
+        #     for col in self.contact_matrix.columns:
+        #         self.contact_matrix.loc[row, col] = self.r_base + float(row[1]) * float(col[1]) * self.r2 \
+        #                                             + float(row[1]) * float(col[1]) * (
+        #                                                         float(row[4]) * float(col[4])) * self.r3
+        #         if row == col:
+        #             self.contact_matrix.loc[row, col] = self.contact_matrix.loc[row, col] + r1
 
 # Use contact matrix to calculate transmission rate
         self.Beta = self.beta * self.contact_matrix
