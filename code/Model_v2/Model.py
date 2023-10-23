@@ -210,7 +210,7 @@ class Model:
                     self.contact_matrix.loc[row, col] = self.contact_matrix.loc[row, col] * self.r1
                 if (row[1] == '1') & (col[1] == '1'):
                     self.contact_matrix.loc[row, col] = self.contact_matrix.loc[row, col] * self.r2
-                if row[4] == '1':
+                if (row[4] == '1') & (col[4] == '1'):
                     self.contact_matrix.loc[row, col] = self.contact_matrix.loc[row, col] * self.r3
 
         # for row in self.contact_matrix.index:
