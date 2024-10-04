@@ -4,7 +4,7 @@
 
 This repository provides the code for the Feedback-Informed Epidemiological Model (FIEM). 
 
-et up a virtual environment and install dependencies:
+Set up a virtual environment and install dependencies:
 ```bash
 python -m venv venv
 source venv/bin/activate
