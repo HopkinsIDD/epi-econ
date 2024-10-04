@@ -10,4 +10,5 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
-- **/src**: Contains the main source code for the project.
+- **/src**: Contains the main source code for the FIEM.
+- **/main.py**: Contains the code to run FIEM and base parameters.
