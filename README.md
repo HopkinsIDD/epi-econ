@@ -20,7 +20,7 @@ pip install -r requirements.txt
 ```
 **/src**: Contains the main source code for the FIEM.
 **/main.py**: Contains the code to run FIEM and base parameters.
-**`results/`** – contains code to **replicate the figures** from the manuscript.  
+- `results` – contains code to **replicate the figures** from the manuscript.  
 
 
 ## Parameters
