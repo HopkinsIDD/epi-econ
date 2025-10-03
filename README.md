@@ -6,10 +6,29 @@ This repository provides the code for the Feedback-Informed Epidemiological Mode
 
 Du, Zahn et al, "**Modeling dynamic disease-behavior feedbacks for improved epidemic prediction and response**", 2024 
 
+# Repository Structure
+
+epi-econ/
+├── src/
+│   ├── __init__.py
+│   ├── [model modules, e.g. epidemiology.py, behavior.py, policy.py, utils.py]
+│   └── …  
+├── main.py
+├── requirements.txt
+├── README.md
+└── results/         # (optional) output data, plots, logs
+
+
 To run the code, set up a virtual environment and install the dependencies:
-```bash
+# Clone this repository
+git clone https://github.com/HopkinsIDD/epi-econ.git
+cd epi-econ
+
+# Create a virtual environment
 python -m venv venv
-source venv/bin/activate
+source venv/bin/activate   # (or `venv\Scripts\activate` on Windows)
+
+# Install required packages
 pip install -r requirements.txt
 ```
 - **/src**: Contains the main source code for the FIEM.
