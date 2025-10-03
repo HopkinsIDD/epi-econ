@@ -18,9 +18,9 @@ source venv/bin/activate   # (or `venv\Scripts\activate` on Windows)
 # Install required packages
 pip install -r requirements.txt
 ```
-- **/src**: Contains the main source code for the FIEM.
-- **/main.py**: Contains the code to run FIEM and base parameters.
-- **`results/`** – contains code to **replicate the figures** from the manuscript.  
+**/src**: Contains the main source code for the FIEM.
+**/main.py**: Contains the code to run FIEM and base parameters.
+**`results/`** – contains code to **replicate the figures** from the manuscript.  
 
 
 ## Parameters
