@@ -6,19 +6,6 @@ This repository provides the code for the Feedback-Informed Epidemiological Mode
 
 Du, Zahn et al, "**Modeling dynamic disease-behavior feedbacks for improved epidemic prediction and response**", 2024 
 
-# Repository Structure
-
-epi-econ/
-├── src/
-│   ├── __init__.py
-│   ├── [model modules, e.g. epidemiology.py, behavior.py, policy.py, utils.py]
-│   └── …  
-├── main.py
-├── requirements.txt
-├── README.md
-└── results/         # (optional) output data, plots, logs
-
-
 To run the code, set up a virtual environment and install the dependencies:
 # Clone this repository
 git clone https://github.com/HopkinsIDD/epi-econ.git
